@@ -62,3 +62,160 @@ document.addEventListener('wpcf7mailsent', function(event) {
     }
 });
 </script>
+_________________________________________________________________________________
+[contact-form-7 id="1894" title="Đăng kí"]
+
+<!-- POPUP SAU KHI GỬI FORM -->
+<div id="lp-popup-overlay">
+  <div id="lp-popup-box">
+    <div class="lp-popup-icon-wrap">
+      <span class="lp-popup-check">✓</span>
+    </div>
+    <h3>Gửi thông tin thành công</h3>
+    <p>Cảm ơn bạn đã liên hệ Lộc Phát Autotech. Chúng tôi sẽ phản hồi trong thời gian sớm nhất.</p>
+    <button id="lp-popup-home-btn">Về trang chủ</button>
+  </div>
+</div>
+
+<style>
+  /* Nền mờ full màn hình */
+  #lp-popup-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.55);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+    
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.35s ease;
+  }
+
+  /* Khi active */
+  #lp-popup-overlay.is-active {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  /* Hộp popup */
+  #lp-popup-box {
+    background: #ffffff;
+    max-width: 420px;
+    width: 90%;
+    padding: 28px 24px 24px;
+    border-radius: 14px;
+    text-align: center;
+    box-shadow: 0 16px 40px rgba(0, 0, 0, 0.25);
+    font-family: inherit;
+
+    opacity: 0;
+    transform: translateY(20px) scale(0.96);
+    transition: all 0.35s ease;
+  }
+
+  /* Fade + slide in của hộp */
+  #lp-popup-overlay.is-active #lp-popup-box {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+
+  /* Icon tròn */
+  .lp-popup-icon-wrap {
+    width: 70px;
+    height: 70px;
+    border-radius: 50%;
+    background: #13b36b; /* xanh xác nhận */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 18px;
+  }
+
+  .lp-popup-check {
+    color: #ffffff;
+    font-size: 34px;
+    line-height: 1;
+  }
+
+  /* Animation bounce cho icon */
+  #lp-popup-overlay.is-active .lp-popup-icon-wrap {
+    animation: lp-pop 0.5s ease-out forwards;
+  }
+
+  @keyframes lp-pop {
+    0% {
+      transform: scale(0);
+      opacity: 0;
+    }
+    60% {
+      transform: scale(1.15);
+      opacity: 1;
+    }
+    100% {
+      transform: scale(1);
+      opacity: 1;
+    }
+  }
+
+  #lp-popup-box h3 {
+    margin: 0 0 8px;
+    font-size: 20px;
+    font-weight: 700;
+    color: #222222;
+  }
+
+  #lp-popup-box p {
+    margin: 0 0 20px;
+    font-size: 14px;
+    color: #555555;
+  }
+
+  #lp-popup-home-btn {
+    display: inline-block;
+    padding: 10px 22px;
+    border-radius: 999px;
+    border: none;
+    cursor: pointer;
+    background: #0073aa; /* xanh cùng tông site */
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 600;
+    letter-spacing: 0.4px;
+    text-transform: uppercase;
+  }
+
+  #lp-popup-home-btn:hover {
+    background: #005f88;
+  }
+</style>
+
+<script>
+  // Hiện popup sau khi gửi form CF7 thành công
+  document.addEventListener('wpcf7mailsent', function (event) {
+    // Đổi ID nếu form khác 1894
+    if (event.detail.contactFormId == 1894) {
+      var overlay = document.getElementById('lp-popup-overlay');
+      if (overlay) {
+        overlay.classList.add('is-active');
+      }
+
+      // Reset form cho sạch
+      var form = document.querySelector('.wpcf7 form');
+      if (form) form.reset();
+    }
+  }, false);
+
+  // Xử lý nút "Về trang chủ"
+  document.addEventListener('DOMContentLoaded', function () {
+    var homeBtn = document.getElementById('lp-popup-home-btn');
+    if (homeBtn) {
+      homeBtn.addEventListener('click', function () {
+        // Đổi thành URL home thật của Lộc Phát nếu cần
+        window.location.href = '/';
+        // ví dụ: window.location.href = 'https://locphatautotech.com/';
+      });
+    }
+  });
+</script>
