@@ -1,0 +1,10 @@
+<script>
+  document.addEventListener('wpcf7mailsent', function(event) {
+    // Đổi 1894 thành ID form của bro (trong shortcode: [contact-form-7 id="1894" ...])
+    if (event.detail.contactFormId == 1894) {
+      alert('Cảm ơn bạn, form đã được gửi thành công. Chúng tôi sẽ liên hệ lại sớm nhất!');
+      // Nếu muốn clear form luôn:
+      event.target.reset();
+    }
+  }, false);
+</script>
